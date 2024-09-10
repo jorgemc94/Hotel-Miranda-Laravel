@@ -3,6 +3,8 @@
 namespace App\Http\Controllers;
 
 use Illuminate\Http\Request;
+use App\Models\Activity;
+use Illuminate\Support\Facades\Auth;
 
 class ActivityController extends Controller
 {
@@ -11,7 +13,8 @@ class ActivityController extends Controller
      */
     public function index()
     {
-        //
+        $activities = Auth::user()->activities()->get();
+        return view('activities.index', ['activities' => $activities]);
     }
 
     /**
@@ -27,7 +30,19 @@ class ActivityController extends Controller
      */
     public function store(Request $request)
     {
-        //
+        $validated = $request->validate([
+            'type' => ['required', 'in:Surf,Windsurf,Kayak,ATV,Hot air baloon'],
+            'dateTime' => ['required', 'date'],
+            'notes' => ['required', 'string', 'max:200'],
+        ]);
+
+        $activity = Activity::create(array_merge($validated, [
+            'user_id' => Auth::user()->id,
+        ]));
+
+        $activities = Auth::user()->activities()->get();
+
+        return view('activities.index',['activities' => $activities]);
     }
 
     /**
@@ -35,7 +50,9 @@ class ActivityController extends Controller
      */
     public function show(string $id)
     {
-        //
+        $activity = Activity::findOrFail($id);
+
+        return view('activities.single', ['activity' => $activity]);
     }
 
     /**
@@ -51,7 +68,18 @@ class ActivityController extends Controller
      */
     public function update(Request $request, string $id)
     {
-        //
+        $validated = $request->validate([
+            'type' => ['required', 'in:Surf,Windsurf,Kayak,ATV,Hot air baloon'],
+            'dateTime' => ['required', 'date'],
+            'notes' => ['required', 'string', 'max:200'],
+            'paid' => ['required', 'boolean'],
+            'satisfaction' => ['required', 'integer', 'between:0,10'],
+        ]);
+
+        $activity = Activity::findOrFail($id);
+        $activity->update($validated);
+
+        return view('activities.single', ['activity' => $activity]);
     }
 
     /**
@@ -59,6 +87,8 @@ class ActivityController extends Controller
      */
     public function destroy(string $id)
     {
-        //
+        $deleted = Activity::destroy($id);
+
+        return response()->json(['message'=> 'Activity deleted successfully']);
     }
 }
