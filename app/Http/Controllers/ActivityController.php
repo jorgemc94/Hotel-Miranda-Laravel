@@ -51,10 +51,10 @@ class ActivityController extends Controller
      */
     public function show(string $id)
     {
-        try {
-            $activity = Activity::findOrFail($id);
+
+        if ($activity) {
             return response()->json($activity, 200);
-        } catch (ModelNotFoundException $e) {
+        } else {
             return response()->json(['message' => 'Activity not found'], 404);
         }
     }
@@ -79,17 +79,17 @@ class ActivityController extends Controller
             'dateTime' => ['required', 'date'],
             'notes' => ['required', 'string', 'max:200'],
             'satisfaction' => ['required', 'integer', 'between:0,10'],
+            'paid' => ['sometimes', 'boolean']
         ]);
-
-        try {
-            $validated['paid'] = $request->has('paid') ? true : false;
+        
             $activity = Activity::findOrFail($id);
             $activity->update($validated);
 
-            return response()->json($activity, 200);
-        } catch (ModelNotFoundException $e) {
-            return response()->json(['message' => 'Activity not found'], 404);
-        }
+            if ($activity) {
+                return response()->json($activity, 200);
+            } else {
+                return response()->json(['message' => 'Activity not found'], 404);
+            }
     }
 
     /**
