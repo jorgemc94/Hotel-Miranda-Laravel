@@ -13,10 +13,10 @@ return new class extends Migration
     {
         Schema::create('activities', function (Blueprint $table) {
             $table->id();
-            $table->enum('type', ['surf', 'windsurf', 'kayak', 'atv', 'hot air balloon']);
+            $table->enum('type', ['Surf', 'Windsurf', 'Kayak', 'ATV', 'Hot air baloon']);
             $table->unsignedBigInteger('user_id');
             $table->foreign('user_id')->references('id')->on('users');
-            $table->dateTime('date');
+            $table->dateTime('dateTime');
             $table->boolean('paid')->default(false);
             $table->text('notes')->nullable();
             $table->unsignedTinyInteger('satisfaction')->nullable();

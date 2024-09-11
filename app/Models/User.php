@@ -46,7 +46,7 @@ class User extends Authenticatable
         ];
     }
 
-    public function activity():HasMany
+    public function activities()
     {
         return $this->hasMany(Activity::class);
     }

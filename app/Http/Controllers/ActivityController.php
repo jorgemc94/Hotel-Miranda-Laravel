@@ -5,6 +5,7 @@ namespace App\Http\Controllers;
 use Illuminate\Http\Request;
 use App\Models\Activity;
 use Illuminate\Support\Facades\Auth;
+use Illuminate\Database\Eloquent\ModelNotFoundException;
 
 class ActivityController extends Controller
 {
@@ -14,7 +15,7 @@ class ActivityController extends Controller
     public function index()
     {
         $activities = Auth::user()->activities()->get();
-        return view('activities.index', ['activities' => $activities]);
+        return response()->json($activities, 200);
     }
 
     /**
@@ -22,7 +23,7 @@ class ActivityController extends Controller
      */
     public function create()
     {
-        //
+        return view('activities.create');
     }
 
     /**
@@ -42,7 +43,7 @@ class ActivityController extends Controller
 
         $activities = Auth::user()->activities()->get();
 
-        return view('activities.index',['activities' => $activities]);
+        return response()->json($activities, 201);
     }
 
     /**
@@ -50,9 +51,12 @@ class ActivityController extends Controller
      */
     public function show(string $id)
     {
-        $activity = Activity::findOrFail($id);
-
-        return view('activities.single', ['activity' => $activity]);
+        try {
+            $activity = Activity::findOrFail($id);
+            return response()->json($activity, 200);
+        } catch (ModelNotFoundException $e) {
+            return response()->json(['message' => 'Activity not found'], 404);
+        }
     }
 
     /**
@@ -60,7 +64,9 @@ class ActivityController extends Controller
      */
     public function edit(string $id)
     {
-        //
+        $activity = Activity::findOrFail($id);
+
+        return view('activities.edit', ['activity' => $activity]);
     }
 
     /**
@@ -72,14 +78,18 @@ class ActivityController extends Controller
             'type' => ['required', 'in:Surf,Windsurf,Kayak,ATV,Hot air baloon'],
             'dateTime' => ['required', 'date'],
             'notes' => ['required', 'string', 'max:200'],
-            'paid' => ['required', 'boolean'],
             'satisfaction' => ['required', 'integer', 'between:0,10'],
         ]);
 
-        $activity = Activity::findOrFail($id);
-        $activity->update($validated);
+        try {
+            $validated['paid'] = $request->has('paid') ? true : false;
+            $activity = Activity::findOrFail($id);
+            $activity->update($validated);
 
-        return view('activities.single', ['activity' => $activity]);
+            return response()->json($activity, 200);
+        } catch (ModelNotFoundException $e) {
+            return response()->json(['message' => 'Activity not found'], 404);
+        }
     }
 
     /**
@@ -89,6 +99,10 @@ class ActivityController extends Controller
     {
         $deleted = Activity::destroy($id);
 
-        return response()->json(['message'=> 'Activity deleted successfully']);
+        if ($deleted) {
+            return response()->json(['message' => 'Activity deleted successfully'], 200);
+        } else {
+            return response()->json(['message' => 'Activity not found'], 404);
+        }
     }
 }
