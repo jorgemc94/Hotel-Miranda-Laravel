@@ -19,7 +19,7 @@ return new class extends Migration
             $table->dateTime('dateTime');
             $table->boolean('paid')->default(false);
             $table->text('notes')->nullable();
-            $table->unsignedTinyInteger('satisfaction')->nullable();
+            $table->integer('satisfaction')->nullable();
             $table->timestamps();
         });
     }

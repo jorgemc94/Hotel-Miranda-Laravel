@@ -35,6 +35,8 @@ class ActivityController extends Controller
             'type' => ['required', 'in:Surf,Windsurf,Kayak,ATV,Hot air baloon'],
             'dateTime' => ['required', 'date'],
             'notes' => ['required', 'string', 'max:200'],
+            'paid' => 'boolean',
+            'satisfaction' => 'integer',
         ]);
 
         $activity = Activity::create(array_merge($validated, [
@@ -51,6 +53,7 @@ class ActivityController extends Controller
      */
     public function show(string $id)
     {
+        $activity = Activity::find($id);
 
         if ($activity) {
             return response()->json($activity, 200);
@@ -79,17 +82,14 @@ class ActivityController extends Controller
             'dateTime' => ['required', 'date'],
             'notes' => ['required', 'string', 'max:200'],
             'satisfaction' => ['required', 'integer', 'between:0,10'],
-            'paid' => ['sometimes', 'boolean']
         ]);
-        
-            $activity = Activity::findOrFail($id);
-            $activity->update($validated);
-
-            if ($activity) {
-                return response()->json($activity, 200);
-            } else {
-                return response()->json(['message' => 'Activity not found'], 404);
-            }
+    
+        $validated['paid'] = $request->has('paid') ? true : false;
+    
+        $activity = Activity::findOrFail($id);
+        $activity->update($validated);
+    
+        return response()->json($activity, 200);
     }
 
     /**

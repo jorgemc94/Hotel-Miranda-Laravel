@@ -7,6 +7,16 @@
 </head>
 <body>
     <div class="container">
+        @if($errors->any())
+            <div class="alert alert-danger">
+                <ul>
+                    @foreach ($errors->all() as $error)
+                        <li>{{ $error }}</li>
+                    @endforeach
+                </ul>
+            </div>
+        @endif
+
         <h1>Edit Activity</h1>
 
         <form action="{{ route('activities.update', $activity->id) }}" method="POST">
@@ -38,6 +48,7 @@
             <div class="form-group">
                 <label for="paid">Paid:</label>
                 <input type="checkbox" id="paid" name="paid" {{ $activity->paid ? 'checked' : '' }}>
+
             </div>
 
             <div class="form-group">
