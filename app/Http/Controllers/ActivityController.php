@@ -53,7 +53,7 @@ class ActivityController extends Controller
      */
     public function show(string $id)
     {
-        $activity = Activity::find($id);
+        $activity = Auth::user()->activities()->where('id', $id)->first();
 
         if ($activity) {
             return response()->json($activity, 200);
@@ -67,11 +67,11 @@ class ActivityController extends Controller
      */
     public function edit(string $id)
     {
-        $activity = Activity::findOrFail($id);
-
+        $activity = Auth::user()->activities()->where('id', $id)->firstOrFail();
+    
         return view('activities.edit', ['activity' => $activity]);
     }
-
+    
     /**
      * Update the specified resource in storage.
      */
