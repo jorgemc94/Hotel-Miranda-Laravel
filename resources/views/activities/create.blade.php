@@ -7,13 +7,13 @@
     <link rel="stylesheet" href="{{ asset('css/app.css') }}">
 </head>
 <body>
-    <div class="container">
+    <div>
         <h1>Create New Activity</h1>
 
         <form action="{{ route('activities.store') }}" method="POST">
             @csrf
 
-            <div class="form-group">
+            <div>
                 <label for="type">Type:</label>
                 <select id="type" name="type" class="form-control" required>
                     <option value="">Select an option</option>
@@ -28,7 +28,7 @@
                 @enderror
             </div>
 
-            <div class="form-group">
+            <div>
                 <label for="dateTime">Date and Time:</label>
                 <input type="datetime-local" id="dateTime" name="dateTime" class="form-control" required>
                 @error('dateTime')
@@ -36,7 +36,7 @@
                 @enderror
             </div>
 
-            <div class="form-group">
+            <div>
                 <label for="notes">Notes:</label>
                 <textarea id="notes" name="notes" class="form-control" rows="4" maxlength="200" required></textarea>
                 @error('notes')

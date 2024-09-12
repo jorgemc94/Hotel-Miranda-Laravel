@@ -6,7 +6,7 @@
     <title>Edit Activity</title>
 </head>
 <body>
-    <div class="container">
+    <div>
         @if($errors->any())
             <div class="alert alert-danger">
                 <ul>
@@ -23,7 +23,7 @@
             @csrf
             @method('PUT')
 
-            <div class="form-group">
+            <div>
                 <label for="type">Type:</label>
                 <select id="type" name="type" class="form-control">
                     <option value="">Select an option</option>
@@ -35,28 +35,33 @@
                 </select>
             </div>
 
-            <div class="form-group">
+            <div>
                 <label for="dateTime">Date and Time:</label>
                 <input type="datetime-local" id="dateTime" name="dateTime" class="form-control" value="{{ \Carbon\Carbon::parse($activity->dateTime)->format('Y-m-d\TH:i') }}">
             </div>
 
-            <div class="form-group">
+            <div>
                 <label for="notes">Notes:</label>
                 <textarea id="notes" name="notes" class="form-control" rows="4" maxlength="200" >{{ old('notes', $activity->notes) }}</textarea>
             </div>
 
-            <div class="form-group">
+            <div>
                 <label for="paid">Paid:</label>
                 <input type="checkbox" id="paid" name="paid" {{ $activity->paid ? 'checked' : '' }}>
 
             </div>
 
-            <div class="form-group">
+            <div>
                 <label for="satisfaction">Satisfaction (0-10):</label>
                 <input type="number" id="satisfaction" name="satisfaction" class="form-control" min="0" max="10" value="{{ old('satisfaction', $activity->satisfaction) }}">
             </div>
 
             <button type="submit" class="btn btn-primary">Update Activity</button>
+        </form>
+        <form action="{{ route('activities.destroy', $activity->id) }}" method="POST" onsubmit="return confirm('Are you sure you want to delete this activity?');">
+            @csrf
+            @method('DELETE')
+            <button type="submit" class="btn btn-danger">Delete Activity</button>
         </form>
     </div>
 </body>
