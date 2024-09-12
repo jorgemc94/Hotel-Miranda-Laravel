@@ -89,7 +89,7 @@ class ActivityController extends Controller
         $activity = Activity::findOrFail($id);
         $activity->update($validated);
     
-        return response()->json($activity, 200);
+        return response()->json(['message' => 'Activity updated successfully', 'activity' => $activity], 200);
     }
 
     /**

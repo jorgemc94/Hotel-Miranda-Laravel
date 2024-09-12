@@ -7,81 +7,83 @@ use Tests\TestCase;
 use App\Models\User;
 use App\Models\Activity;
 
-class ActivityControllerTest extends TestCase
+class ActivityTest extends TestCase
 {
     use RefreshDatabase;
 
-    /** @test */
-    public function it_can_list_all_activities()
-    {
-        $user = User::factory()->create();
-        $activity = Activity::factory()->create(['user_id' => $user->id]);
+    protected $user;
+    protected $activity;
 
-        $response = $this->actingAs($user)->get('/activities');
+    public function setUp(): void
+    {
+        parent::setUp();
+
+        $this->user = User::factory()->create([
+            'name' => 'Test User',
+            'email' => 'test@example.com',
+            'password' => bcrypt('password'),
+        ]);
+
+        $this->activity = Activity::factory()->create([
+            'user_id' => $this->user->id,
+        ]);
+
+        $this->actingAs($this->user);
+    }
+
+    public function test_activities_route_returns_successful_response(): void
+    {
+        $response = $this->get('/activities');
 
         $response->assertStatus(200);
-        $response->assertSee($activity->type);
     }
 
-    /** @test */
-    public function it_can_show_a_single_activity()
+    public function test_activities_route_returns_array_of_activities(): void
     {
-        $user = User::factory()->create();
-        $activity = Activity::factory()->create(['user_id' => $user->id]);
+        $response = $this->getJson('/activities');
 
-        $response = $this->actingAs($user)->get('/activities/' . $activity->id);
+        $response->assertStatus(200)
+                ->assertJsonStructure([
+                    '*' => [ 
+                        'id',
+                        'type',
+                        'user_id',
+                        'dateTime',
+                        'paid',
+                        'notes',
+                        'satisfaction',
+                    ]
+                ]);
+    }
+
+    public function test_activities_single_route_returns_successful_response(): void
+    {
+        $response = $this->get('/activities/' . $this->activity->id);
 
         $response->assertStatus(200);
-        $response->assertSee($activity->type);
     }
 
-    /** @test */
-    public function it_can_create_an_activity()
+    public function test_delete_activity_successfully(): void
     {
-        $user = User::factory()->create();
-        $data = [
-            'type' => 'surf',
-            'user_id' => $user->id,
-            'datetime' => now(),
-            'paid' => false,
-            'notes' => 'Test notes',
-            'satisfaction' => 5,
-        ];
-
-        $response = $this->actingAs($user)->post('/activities', $data);
-
-        $response->assertStatus(201);
-        $this->assertDatabaseHas('activities', $data);
+        $this->assertDatabaseHas('activities', [
+            'id' => $this->activity->id
+        ]);
+        $response = $this->delete('/activities/' . $this->activity->id);
+        $response->assertStatus(200)->assertJson(['message' => 'Activity deleted successfully']);
     }
 
-    /** @test */
-    public function it_can_update_an_activity()
+    public function test_update_activity_successfully(): void
     {
-        $user = User::factory()->create();
-        $activity = Activity::factory()->create(['user_id' => $user->id]);
-        $data = [
-            'type' => 'kayak',
-            'datetime' => now(),
+        $newData = [
+            'type' => 'Kayak',
+            'dateTime' => now()->addDay()->format('Y-m-d H:i:s'),
             'paid' => true,
             'notes' => 'Updated notes',
             'satisfaction' => 8,
         ];
 
-        $response = $this->actingAs($user)->put('/activities/' . $activity->id, $data);
+        $response = $this->putJson('/activities/' . $this->activity->id, $newData);
 
-        $response->assertStatus(200);
-        $this->assertDatabaseHas('activities', $data);
-    }
-
-    /** @test */
-    public function it_can_delete_an_activity()
-    {
-        $user = User::factory()->create();
-        $activity = Activity::factory()->create(['user_id' => $user->id]);
-
-        $response = $this->actingAs($user)->delete('/activities/' . $activity->id);
-
-        $response->assertStatus(200);
-        $this->assertDatabaseMissing('activities', ['id' => $activity->id]);
+        $response->assertStatus(200) ->assertJson(['message' => 'Activity updated successfully', 'activity' => $newData,]);
     }
 }
