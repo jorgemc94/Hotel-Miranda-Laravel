@@ -15,7 +15,7 @@ class ActivityController extends Controller
     public function index()
     {
         $activities = Auth::user()->activities()->get();
-        return response()->json($activities, 200);
+        return view('activities.index', ['activities' => $activities]);
     }
 
     /**
@@ -36,7 +36,7 @@ class ActivityController extends Controller
             'dateTime' => ['required', 'date'],
             'notes' => ['required', 'string', 'max:200'],
             'paid' => 'boolean',
-            'satisfaction' => 'integer',
+            'satisfaction' => ['nullable', 'integer', 'between:0,10'],
         ]);
 
         $activity = Activity::create(array_merge($validated, [
@@ -45,7 +45,7 @@ class ActivityController extends Controller
 
         $activities = Auth::user()->activities()->get();
 
-        return response()->json($activities, 201);
+        return redirect()->route('activities.index')->with('success', 'Activity created successfully!');
     }
 
     /**
@@ -53,13 +53,8 @@ class ActivityController extends Controller
      */
     public function show(string $id)
     {
-        $activity = Auth::user()->activities()->where('id', $id)->first();
-
-        if ($activity) {
-            return response()->json($activity, 200);
-        } else {
-            return response()->json(['message' => 'Activity not found'], 404);
-        }
+        $activity = Auth::user()->activities()->where('id', $id)->firstOrFail();
+        return view('activities.show', ['activity' => $activity]);
     }
 
     /**
@@ -84,12 +79,12 @@ class ActivityController extends Controller
             'satisfaction' => ['required', 'integer', 'between:0,10'],
         ]);
     
-        $validated['paid'] = $request->has('paid') ? true : false;
+        $validated['paid'] = $request->boolean('paid', false);
     
-        $activity = Activity::findOrFail($id);
+        $activity = Auth::user()->activities()->where('id', $id)->firstOrFail();
         $activity->update($validated);
     
-        return response()->json(['message' => 'Activity updated successfully', 'activity' => $activity], 200);
+        return redirect()->route('activities.index')->with('success', 'Activity updated successfully!');
     }
 
     /**
@@ -97,12 +92,10 @@ class ActivityController extends Controller
      */
     public function destroy(string $id)
     {
-        $deleted = Activity::destroy($id);
+        $activity = Auth::user()->activities()->where('id', $id)->firstOrFail();
+        $activity->delete();
+        
+        return redirect()->route('activities.index')->with('success', 'Activity deleted successfully!');
 
-        if ($deleted) {
-            return response()->json(['message' => 'Activity deleted successfully'], 200);
-        } else {
-            return response()->json(['message' => 'Activity not found'], 404);
-        }
     }
 }
