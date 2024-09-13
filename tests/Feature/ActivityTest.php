@@ -19,9 +19,9 @@ class ActivityTest extends TestCase
         parent::setUp();
 
         $this->user = User::factory()->create([
-            'name' => 'Test User',
-            'email' => 'test@example.com',
-            'password' => bcrypt('password'),
+            'name' => 'Jorge',
+            'email' => 'jorgemc1294@gmail.com',
+            'password' => bcrypt('1234'),
         ]);
 
         $this->activity = Activity::factory()->create([
