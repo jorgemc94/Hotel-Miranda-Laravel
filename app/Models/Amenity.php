@@ -10,7 +10,7 @@ class Amenity extends Model
     use HasFactory;
 
     protected $fillable = [
-        'room_id', 'amenitie'
+        'room_id', 'amenity'
     ];
 
     public function room():BelongsToMany
