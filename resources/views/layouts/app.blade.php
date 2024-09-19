@@ -47,7 +47,7 @@
                         <li><a href="{{ route('about') }}">About Us</a></li>
                         <li><a href="{{ route('rooms') }}">Rooms</a></li>
                         <li><a href="/offers">Offers</a></li>
-                        <li><a href="/contact">Contact</a></li>
+                        <li><a href="{{ route('contact') }}">Contact</a></li>
                     </ul>
                 </nav>
                 <div class="header__icons">

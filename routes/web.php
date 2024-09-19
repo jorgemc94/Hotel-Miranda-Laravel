@@ -6,6 +6,7 @@ use App\Http\Controllers\ActivityController;
 use App\Http\Controllers\RoomController;
 use App\Http\Controllers\IndexController;
 use App\Http\Controllers\AboutController;
+use App\Http\Controllers\ContactController;
 
 // Route::get('/', function () {
 //     return view('welcome');
@@ -27,5 +28,6 @@ Route::get('/', [IndexController::class, 'index'])->name('home');
 Route::get('/rooms', [RoomController::class, 'index'])->name('rooms') ;
 Route::get('/rooms/{id}', [RoomController::class, 'show'])->name('room-details');
 Route::get('/about', [AboutController::class, 'index'])->name('about');
+Route::get('/contact', [ContactController::class, 'index'])->name('contact');
 
 require __DIR__.'/auth.php';
