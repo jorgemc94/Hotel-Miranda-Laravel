@@ -7,6 +7,7 @@ use App\Http\Controllers\RoomController;
 use App\Http\Controllers\IndexController;
 use App\Http\Controllers\AboutController;
 use App\Http\Controllers\ContactController;
+use App\Http\Controllers\OfferController;
 
 // Route::get('/', function () {
 //     return view('welcome');
@@ -29,5 +30,6 @@ Route::get('/rooms', [RoomController::class, 'index'])->name('rooms') ;
 Route::get('/rooms/{id}', [RoomController::class, 'show'])->name('room-details');
 Route::get('/about', [AboutController::class, 'index'])->name('about');
 Route::get('/contact', [ContactController::class, 'index'])->name('contact');
+Route::get('/offer', [OfferController::class, 'index'])->name('offer');
 
 require __DIR__.'/auth.php';
