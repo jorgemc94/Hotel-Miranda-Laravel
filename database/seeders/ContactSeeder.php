@@ -4,6 +4,7 @@ namespace Database\Seeders;
 
 use Illuminate\Database\Console\Seeds\WithoutModelEvents;
 use Illuminate\Database\Seeder;
+use App\Models\Contact;
 
 class ContactSeeder extends Seeder
 {
@@ -12,8 +13,6 @@ class ContactSeeder extends Seeder
      */
     public function run(): void
     {
-        \App\Models\Contact::factory()
-        ->count(20)
-        ->create();
+        Contact::factory()->count(50)->create();
     }
 }

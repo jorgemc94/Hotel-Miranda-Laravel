@@ -11,7 +11,7 @@
         </div>
     </header>
     <section class="checking">
-        <form class="checking__inner form --max-width" action="room-list.html">
+        <form class="checking__inner form --max-width" action="{{ route('rooms') }}" method="GET">
             <div class="form__control">
                 <div class="form__control-input">
                     <label class="checking__label" for="check_in">Arrival Date</label>

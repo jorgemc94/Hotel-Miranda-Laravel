@@ -11,6 +11,8 @@ use Illuminate\Database\Eloquent\Factories\Factory;
  */
 class BookingFactory extends Factory
 {
+    protected $model = Booking::class;
+
     /**
      * Define the model's default state.
      *
@@ -20,12 +22,14 @@ class BookingFactory extends Factory
     {
         return [
             'fullName' => $this->faker->name,
-            'bookDate' => $this->faker->date(),
-            'checkIn' => $this->faker->date(),
-            'checkOut' => $this->faker->date(),
-            'specialRequest' => $this->faker->sentence(),
+            'bookDate' => $this->faker->date,
+            'checkIn' => $this->faker->date,
+            'checkOut' => $this->faker->date,
+            'specialRequest' => $this->faker->sentence,
             'status' => $this->faker->randomElement(['In progress', 'Check In', 'Check Out']),
-            'room_id' => Room::factory(),
+            'room_id' => Room::inRandomOrder()->first()->id,
+            'phone' => $this->faker->phoneNumber,
+            'email' => $this->faker->safeEmail,
         ];
     }
 }

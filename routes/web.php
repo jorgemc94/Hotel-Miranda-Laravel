@@ -4,7 +4,7 @@ use App\Http\Controllers\ProfileController;
 use Illuminate\Support\Facades\Route;
 use App\Http\Controllers\ActivityController;
 use App\Http\Controllers\RoomController;
-use App\Http\Controllers\IndexController;
+use App\Http\Controllers\HomeController;
 use App\Http\Controllers\AboutController;
 use App\Http\Controllers\ContactController;
 use App\Http\Controllers\OfferController;
@@ -24,8 +24,7 @@ Route::middleware('auth')->group(function () {
     Route::resource('activities', ActivityController::class);
 });
 
-
-Route::get('/', [IndexController::class, 'index'])->name('home');
+Route::get('/', [HomeController::class, 'index'])->name('home');
 Route::get('/rooms', [RoomController::class, 'index'])->name('rooms') ;
 Route::get('/rooms/{id}', [RoomController::class, 'show'])->name('room-details');
 Route::get('/about', [AboutController::class, 'index'])->name('about');

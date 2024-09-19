@@ -12,7 +12,7 @@ return new class extends Migration
     public function up(): void
     {
         Schema::create('contacts', function (Blueprint $table) {
-            $table->id();
+            $table->id(); 
             $table->date('date');
             $table->string('client_name');
             $table->string('client_email');
@@ -20,7 +20,7 @@ return new class extends Migration
             $table->string('client_photo');
             $table->string('subject');
             $table->string('comment');
-            $table->boolean('status');
+            $table->enum('status', ['false', 'true']);
             $table->timestamps();
         });
     }

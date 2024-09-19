@@ -50,30 +50,32 @@
 
         <img  src="" alt="">
     </section>
+
     <section class="contact__form --max-width">
-        <form class="form__contact">
+        <form class="form__contact" method="POST">
+            @csrf
             <div class="contact__form-control">
                 <img class="contact__form-control-img contact__form-control-img--full-name"
                     src="{{ asset('assets/icon/contact-full-name.svg') }}" alt="">
-                <input class="contact__input" placeholder="Your full name" type="text">
+                <input class="contact__input" placeholder="Your full name" name="client_name" type="text">
             </div>
             <div class="contact__form-control">
                 <img class="contact__form-control-img" src="{{ asset('assets/icon/contact-phone.svg') }}" alt="">
-                <input class="contact__input" placeholder="Add phone number" type="text">
+                <input class="contact__input" placeholder="Add phone number" name="client_phone" type="text">
             </div>
             <div class="contact__form-control">
                 <img class="contact__form-control-img" src="{{ asset('assets/icon/contact-email.svg') }}" alt="">
-                <input class="contact__input" placeholder="Enter email address" type="text">
+                <input class="contact__input" placeholder="Enter email address" name="client_email" type="text">
             </div>
             <div class="contact__form-control">
                 <img class="contact__form-control-img" src="{{ asset('assets/icon/contact-subject.svg') }}" alt="">
-                <input class="contact__input" placeholder="Enter subject" type="text">
+                <input class="contact__input" placeholder="Enter subject" name="subject" type="text">
             </div>
             <div class="contact__form-control contact__form-control--area">
                 <img class="contact__form-control-img contact__form-control-img--area"
                     src="{{ asset('assets/icon/contact-message.svg') }}" alt="">
                 <textarea class="contact__area" name="" placeholder="Enter message" id="" cols="30"
-                    rows="10"></textarea>
+                    rows="10" name="comment" ></textarea>
             </div>
             <div class="contact__form-button">
                 <button class="button contact__button upper__case">Send</button>

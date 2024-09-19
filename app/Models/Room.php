@@ -9,24 +9,22 @@ use Illuminate\Database\Eloquent\Relations\HasMany;
 
 class Room extends Model
 {
+    protected $fillable = ['roomNumber', 'status', 'roomType', 'description', 'offer', 'price', 'discount', 'cancellation'];
+    
     use HasFactory;
 
-    protected $fillable = [
-        'roomNumber', 'status', 'roomType', 'description', 'offer', 'price', 'discount', 'cancellation'
-    ];
-
-    public function bookings(): HasMany
+    public function bookings():HasMany
     {
         return $this->hasMany(Booking::class);
     }
 
-    public function amenities(): BelongsToMany
+    public function amenities():BelongsToMany
     {
-        return $this->belongsToMany(Amenity::class, 'rooms_amenities');
+        return $this->belongsToMany(Amenity::class, 'room_amenity');
     }
 
-    public function photos(): BelongsToMany
+    public function photos():BelongsToMany
     {
-        return $this->belongsToMany(Photo::class, 'rooms_photos');
+        return $this->belongsToMany(Photo::class, 'room_photo');
     }
 }

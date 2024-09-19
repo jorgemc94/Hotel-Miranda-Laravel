@@ -2,15 +2,15 @@
 
 namespace Database\Factories;
 
+use App\Models\Room;
 use App\Models\Amenity;
 use Illuminate\Database\Eloquent\Factories\Factory;
 
 /**
- * @extends \Illuminate\Database\Eloquent\Factories\Factory<\App\Models\Amenity>
+ * @extends \Illuminate\Database\Eloquent\Factories\Factory<\App\Models\RoomAmenity>
  */
-class AmenityFactory extends Factory
+class RoomAmenityFactory extends Factory
 {
-    protected $model = Amenity::class;
     /**
      * Define the model's default state.
      *
@@ -19,7 +19,8 @@ class AmenityFactory extends Factory
     public function definition(): array
     {
         return [
-            'amenitie' => $this->faker->randomElement(['WiFi', 'TV', 'Air Conditioning', 'Pool', 'Gym', 'Parking']),
+            'room_id' => Room::factory(),
+            'amenity_id' => Amenity::factory(),
         ];
     }
 }

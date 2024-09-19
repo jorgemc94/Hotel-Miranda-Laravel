@@ -11,7 +11,6 @@ use Illuminate\Database\Eloquent\Factories\Factory;
 class ContactFactory extends Factory
 {
     protected $model = Contact::class;
-
     /**
      * Define the model's default state.
      *
@@ -21,13 +20,13 @@ class ContactFactory extends Factory
     {
         return [
             'date' => $this->faker->date(),
-            'client_name' => $this->faker->name,
-            'client_email' => $this->faker->safeEmail,
-            'client_phone' => $this->faker->phoneNumber,
-            'client_photo' => $this->faker->imageUrl(),
+            'client_name' => $this->faker->name(),
+            'client_email' => $this->faker->unique()->safeEmail(),
+            'client_phone' => $this->faker->phoneNumber(),
+            'client_photo' => $this->faker->imageUrl(200, 200, 'people'),
             'subject' => $this->faker->sentence(),
-            'comment' => $this->faker->paragraph(),
-            'status' => $this->faker->boolean(),
+            'comment' => $this->faker->text(255),
+            'status' => $this->faker->randomElement(['false', 'true'])
         ];
     }
 }

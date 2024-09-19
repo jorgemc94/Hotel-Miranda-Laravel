@@ -2,7 +2,6 @@
 @section('title', 'Rooms Details')
 @section('content')
 
-    <title>Rooms Details</title>
     <header class="banner">
         <div class="banner__inner banner__inner--rooms --max-width">
             <p class="font__title font__title--dark upper__case">The Ultimate Luxury</p>
@@ -183,7 +182,7 @@
                         </span>
                     </menu>
                     <div class="rooms__grid-item-details offers__details">
-                        <p class="rooms__grid-item-details-title">{{ $room->type }}</p>
+                        <p class="rooms__grid-item-details-title">{{ $room->roomType }}</p>
                         <p class="rooms__grid-item-details-text">{{ $room->description }}</p>
                         <p class="rooms__grid-item-details-price">
                             <span>${{ $room->price }}/Night</span><span><a href="{{ route('room-details', ['id' => $room->id]) }}"></a></span>
@@ -193,7 +192,6 @@
                 @endforeach
             </div>
         </div>
-        
     </section>
     <script src="https://cdn.jsdelivr.net/npm/swiper@11/swiper-bundle.min.js"></script>
 @endsection

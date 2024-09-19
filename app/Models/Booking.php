@@ -7,14 +7,12 @@ use Illuminate\Database\Eloquent\Model;
 
 class Booking extends Model
 {
+    protected $fillable = ['fullName', 'bookDate', 'checkIn', 'checkOut', 'specialRequest', 'status', 'room_id', 'phone', 'email'];
+
     use HasFactory;
 
-    protected $fillable = [
-        'fullName', 'bookDate', 'checkIn', 'checkOut', 'specialRequest', 'status', 'room_id'
-    ];
-
-    public function room():BelongsTo
+    public function room():HasMany
     {
-        return $this->belongsTo(Room::class);
+        return $this->hasMany(Room::class);
     }
 }

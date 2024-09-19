@@ -16,11 +16,12 @@ class DatabaseSeeder extends Seeder
         // User::factory(10)->create();
         $this->call([
             RoomSeeder::class,
-            AmenitySeeder::class,
             BookingSeeder::class,
             ContactSeeder::class,
             PhotoSeeder::class,
-            
+            AmenitySeeder::class,
+            RoomPhotoSeeder::class,
+            RoomAmenitySeeder::class,
         ]);
 
         User::factory()->create([

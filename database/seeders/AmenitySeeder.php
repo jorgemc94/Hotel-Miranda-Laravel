@@ -13,8 +13,6 @@ class AmenitySeeder extends Seeder
      */
     public function run(): void
     {
-        \App\Models\Amenity::factory()
-        ->count(20)
-        ->create();
+        Amenity::factory()->count(20)->create();
     }
 }

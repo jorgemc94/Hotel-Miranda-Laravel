@@ -17,10 +17,12 @@ return new class extends Migration
             $table->date('bookDate');
             $table->date('checkIn');
             $table->date('checkOut');
-            $table->string('specialRequest')->nullable();
+            $table->string('specialRequest');
+            $table->string('phone');
+            $table->string('email');
             $table->enum('status', ['In progress', 'Check In', 'Check Out']);
-            $table->foreignId('room_id')->constrained('rooms');
-            $table->timestamps();
+            $table->foreignId('room_id')->constrained('rooms')->onDelete('cascade');
+            $table->timestamps();;
         });
     }
 

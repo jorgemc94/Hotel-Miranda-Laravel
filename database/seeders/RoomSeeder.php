@@ -4,6 +4,8 @@ namespace Database\Seeders;
 
 use Illuminate\Database\Console\Seeds\WithoutModelEvents;
 use Illuminate\Database\Seeder;
+use App\Models\Room;
+
 
 class RoomSeeder extends Seeder
 {
@@ -12,8 +14,6 @@ class RoomSeeder extends Seeder
      */
     public function run(): void
     {
-        \App\Models\Room::factory()
-            ->count(20)
-            ->create();
+        Room::factory()->count(30)->create();
     }
 }

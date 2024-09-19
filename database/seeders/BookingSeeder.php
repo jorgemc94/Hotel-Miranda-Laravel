@@ -4,6 +4,7 @@ namespace Database\Seeders;
 
 use Illuminate\Database\Console\Seeds\WithoutModelEvents;
 use Illuminate\Database\Seeder;
+use App\Models\Booking;
 
 class BookingSeeder extends Seeder
 {
@@ -12,8 +13,6 @@ class BookingSeeder extends Seeder
      */
     public function run(): void
     {
-        \App\Models\Booking::factory()
-        ->count(20)
-        ->create();
+        Booking::factory()->count(50)->create();
     }
 }
