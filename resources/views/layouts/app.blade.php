@@ -19,8 +19,9 @@
     <!-- Fonts -->
     <link rel="stylesheet" href="{{ asset('assets/css/app.css') }}">
     <script src="{{ asset('assets/js/swiper.js') }}" defer></script>
-    <script src="{{ asset('assets/js/header.js') }}" defer></script>>
+    <script src="{{ asset('assets/js/header.js') }}" defer></script>
     <script src="{{ asset('assets/js/menu.js') }}" defer></script>
+    <title>@yield('title', 'Título por defecto')</title>
     </head>
     <body class="font-sans antialiased">
         <div class="background__header">
@@ -44,7 +45,7 @@
                 <nav class="header__nav" hidden>
                     <ul>
                         <li><a href="/about">About Us</a></li>
-                        <li><a href="/rooms">Rooms</a></li>
+                        <li><a href="{{ route('rooms') }}">Rooms</a></li>
                         <li><a href="/offers">Offers</a></li>
                         <li><a href="/contact">Contact</a></li>
                     </ul>

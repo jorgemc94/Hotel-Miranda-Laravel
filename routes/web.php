@@ -3,8 +3,8 @@
 use App\Http\Controllers\ProfileController;
 use Illuminate\Support\Facades\Route;
 use App\Http\Controllers\ActivityController;
+use App\Http\Controllers\RoomController;
 use App\Http\Controllers\IndexController;
-
 
 // Route::get('/', function () {
 //     return view('welcome');
@@ -21,6 +21,9 @@ Route::middleware('auth')->group(function () {
     Route::resource('activities', ActivityController::class);
 });
 
+
 Route::get('/', [IndexController::class, 'index'])->name('home');
+Route::get('/rooms', [RoomController::class, 'index'])->name('rooms') ;
+Route::get('/rooms/{id}', [RoomController::class, 'show'])->name('room-details');
 
 require __DIR__.'/auth.php';

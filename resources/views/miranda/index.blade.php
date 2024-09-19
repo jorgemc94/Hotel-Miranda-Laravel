@@ -2,7 +2,6 @@
 @section('title', 'Home')
 @section('content')
 
-    <title>Home</title>
     <header class="banner">
         <div class="banner__inner --max-width">
             <p class="font__title font__title--dark  upper__case">The Ultimate Luxury Experience</p>
