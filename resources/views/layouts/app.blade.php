@@ -44,7 +44,7 @@
                 </div>
                 <nav class="header__nav" hidden>
                     <ul>
-                        <li><a href="/about">About Us</a></li>
+                        <li><a href="{{ route('about') }}">About Us</a></li>
                         <li><a href="{{ route('rooms') }}">Rooms</a></li>
                         <li><a href="/offers">Offers</a></li>
                         <li><a href="/contact">Contact</a></li>
