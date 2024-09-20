@@ -3,20 +3,29 @@
 namespace App\Http\Controllers;
 
 use Illuminate\Http\Request;
-use App\Models\Room; 
+use App\Models\Room;
+use APP\Models\Booking;
 
 class RoomController extends Controller
 {
-    public function index()
+    public function index(Request $request)
     {
-        $rooms = Room::with(['bookings', 'amenities', 'photos'])->get();
-        return view('miranda.rooms.index', compact('rooms'));
+        $checkIn = $request->query('checkIn');
+        $checkOut = $request->query('checkOut');
+
+        if ($checkIn && $checkOut) {
+            $rooms = Room::available($checkIn, $checkOut)->get();
+        } else {
+            $rooms = Room::with(['bookings', 'amenities', 'photos'])->get();
+        }
+
+        return view('miranda.rooms.index', ['rooms' => $rooms]);
     }
 
     public function show(string $id)
     {
-        $rooms = Room::with(['bookings', 'amenities', 'photos'])->get();
         $room = Room::with(['bookings', 'amenities', 'photos'])->findOrFail($id);
-        return view('miranda.rooms.room-details', ['rooms' => $rooms , 'room' => $room]);
+        $rooms = Room::with(['bookings', 'amenities', 'photos'])->get();
+        return view('miranda.rooms.room-details', ['rooms' => $rooms, 'room' => $room]);
     }
 }

@@ -14,12 +14,12 @@
         <form class="checking__inner form --max-width" action="{{ route('rooms') }}" method="GET">
             <div class="form__control">
                 <div class="form__control-input">
-                    <label class="checking__label" for="check_in">Arrival Date</label>
-                    <input class="checking__input" type="date" name="check_in" id="check_in">
+                    <label class="checking__label" for="checkIn">Arrival Date</label>
+                    <input class="checking__input" type="date" name="checkIn" id="checkIn">
                 </div>
                 <div class="form__control-input">
-                    <label class="checking__label" for="check_out">LeDeparture Date</label>
-                    <input class="checking__input" type="date" name="check_out" id="check_out">
+                    <label class="checking__label" for="checkOut">LeDeparture Date</label>
+                    <input class="checking__input" type="date" name="checkOut" id="checkOut">
                 </div>
             </div>
             <button class="button button--big upper__case" type="submit">Check availability</button>

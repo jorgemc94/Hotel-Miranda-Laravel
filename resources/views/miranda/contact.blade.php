@@ -52,7 +52,7 @@
     </section>
 
     <section class="contact__form --max-width">
-        <form class="form__contact" method="POST">
+        <form class="form__contact" method="POST" action="{{ route('contact.store') }}">
             @csrf
             <div class="contact__form-control">
                 <img class="contact__form-control-img contact__form-control-img--full-name"
@@ -74,7 +74,7 @@
             <div class="contact__form-control contact__form-control--area">
                 <img class="contact__form-control-img contact__form-control-img--area"
                     src="{{ asset('assets/icon/contact-message.svg') }}" alt="">
-                <textarea class="contact__area" name="" placeholder="Enter message" id="" cols="30"
+                <textarea class="contact__area" placeholder="Enter message" id="" cols="30"
                     rows="10" name="comment" ></textarea>
             </div>
             <div class="contact__form-button">
@@ -82,4 +82,5 @@
             </div>
         </form>
     </section>
+    
 @endsection
