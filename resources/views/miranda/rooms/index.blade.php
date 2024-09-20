@@ -18,7 +18,7 @@
                     <div class="rooms swiper-slide">
                         <div class="rooms__grid-item">
                             
-                                <img class="rooms__grid-item-img" src="{{ asset($room->photo_url) }}" alt="{{ $room->roomType }}">
+                        <img class="rooms__grid-item-img" src="{{  asset($room->photoUrl())  }}" alt="{{ $room->roomType }}">
                             
                             <menu class="rooms__grid-item-menu rooms__menu">
                             <span class="rooms__menu-item">

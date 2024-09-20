@@ -24,7 +24,7 @@
                     <span>/Night</span>
                 </p>
             </div>
-            <img class="room-details__details-img" src="{{ asset($room->photo_url) }}" alt="{{ $room->name }}">
+            <img class="room-details__details-img" src="{{  asset($room->photoUrl())  }}" alt="{{ $room->name }}">
         </div>
 
         <form class="room-details__form" method="POST">
@@ -127,7 +127,7 @@
         <div class="room-details__founder-content">
             <div class="room-details__founder-img" style="background-image: url({{ asset('assets/img/bg-footer.png') }});">
                 <div class="room-details__founder-elipsis">
-                    <img class="room-details__founder-check" src="assets/icon/check.svg" alt="">
+                    <img class="room-details__founder-check" src="{{ asset('assets/icon/check.svg') }}" alt="">
                 </div>
             </div>
             <p class="room-details__founder-title">Rosalina D. William</p>
@@ -157,7 +157,7 @@
             <div class="offers__swiper-wrapper swiper-wrapper">
             @foreach ($rooms as $room)
                 <div class="offers__swiper-slide rooms__grid-item swiper-slide">
-                    <img src="{{ asset($room->photo_url) }}" alt="{{ $room->roomType }}">
+                    <img src="{{  asset($room->photoUrl())  }}" alt="{{ $room->roomType }}">
                     <menu class="rooms__grid-item-menu rooms__menu offers__menu">
                         <span class="rooms__menu-item">
                             <img src="{{ asset('assets/icon/bed.svg')}}" alt="icono de una cama">

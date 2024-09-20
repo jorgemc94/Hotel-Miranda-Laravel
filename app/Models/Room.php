@@ -7,6 +7,11 @@ use Illuminate\Database\Eloquent\Model;
 use Illuminate\Database\Eloquent\Relations\BelongsToMany;
 use Illuminate\Database\Eloquent\Relations\HasMany;
 use Illuminate\Database\Eloquent\Builder;
+use App\Models\Booking;
+use App\Models\Photo;
+use App\Models\Amenity;
+use App\Models\RoomPhoto;
+use App\Models\RoomAmenity;
 
 class Room extends Model
 {
@@ -37,6 +42,11 @@ class Room extends Model
 
     public function photos(): BelongsToMany
     {
-        return $this->belongsToMany(Photo::class, 'room_photo');
+        return $this->belongsToMany(Photo::class, 'room_photo', 'room_id', 'photo_id');
+    }
+
+    public function photoUrl()
+    {
+        return $this->photos()->first() ? $this->photos()->first()->photo_url : 'default.jpg';
     }
 }

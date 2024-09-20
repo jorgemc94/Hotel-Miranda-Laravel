@@ -21,7 +21,7 @@ class PhotoFactory extends Factory
     {
         return [
             'room_id' => Room::factory(),
-            'photo_url' => $this->faker->imageUrl('rooms'),
+            'photo_url' => $this->faker->imageUrl(640, 480, 'rooms', true),
         ];
     }
 }

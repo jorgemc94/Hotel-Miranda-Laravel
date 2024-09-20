@@ -22,7 +22,7 @@
     <script src="{{ asset('assets/js/swiper.js') }}" defer></script>
     <script src="{{ asset('assets/js/header.js') }}" defer></script>
     <script src="{{ asset('assets/js/menu.js') }}" defer></script>
-    <title>@yield('title', 'Título por defecto')</title>
+    <title>@yield('title', 'Hotel Miranda')</title>
     </head>
     <body class="font-sans antialiased">
         <div class="background__header">

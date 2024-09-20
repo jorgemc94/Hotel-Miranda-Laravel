@@ -14,7 +14,7 @@
     @foreach($rooms as $room)
         <div class="offers__card">
             <a href="{{ route('room-details', ['id' => $room->id]) }}">
-                <img class="offers__img" src="asset($room->photo_url)" alt="{{ $room->roomType }}">
+                <img class="offers__img" src="{{ asset($room->photoUrl()) }}" alt="{{ $room->roomType }}">
             </a>
             <div class="offers__inner">
                 <header class="offers__card-header">
