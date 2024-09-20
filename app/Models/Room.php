@@ -23,11 +23,12 @@ class Room extends Model
     {
         return self::whereDoesntHave('bookings', function (Builder $query) use ($checkIn, $checkOut) {
             $query->where(function ($query) use ($checkIn, $checkOut) {
-                $query->where('checkIn', '<', $checkOut)
-                    ->where('checkOut', '>', $checkIn);
+                $query->where('checkIn', '<=', $checkOut)
+                      ->where('checkOut', '>=', $checkIn);
             });
         });
     }
+
 
 
     public function bookings(): HasMany

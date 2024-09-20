@@ -18,7 +18,7 @@ class RoomController extends Controller
             $rooms = Room::with(['bookings', 'amenities', 'photos'])->get();
         }
 
-        return view('miranda.rooms.index', ['rooms' => $rooms]);
+        return view('miranda.rooms.index', ['rooms' => $rooms, 'checkIn' => $checkIn, 'checkOut' => $checkOut]);
     }
 
     public function show(string $id)

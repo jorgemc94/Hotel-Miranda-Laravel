@@ -6,8 +6,8 @@
         <div class="banner__inner --max-width">
             <p class="font__title font__title--dark  upper__case">The Ultimate Luxury Experience</p>
             <h2 class="font__subtitle font__subtitle--dark font__subtitle--banner-home">The Perfect<br />Base For You</h2>
-            <button class="button button__banner upper__case"><a href="about.html">Take a Tour</a></button>
-            <button class="button button__banner button--transparent upper__case"><a href="contact.html">Learn More</a></button>
+            <button class="button button__banner upper__case"><a href="{{ route('about') }}">Take a Tour</a></button>
+            <button class="button button__banner button--transparent upper__case"><a href="{{ route('contact') }}">Learn More</a></button>
         </div>
     </header>
     <section class="checking">

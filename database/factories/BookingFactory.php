@@ -20,11 +20,14 @@ class BookingFactory extends Factory
      */
     public function definition(): array
     {
+        $checkInDate = $this->faker->dateTimeBetween('now');
+        $checkOutDate = $this->faker->dateTimeBetween($checkInDate, '+1 week');
+
         return [
             'fullName' => $this->faker->name,
-            'bookDate' => $this->faker->date,
-            'checkIn' => $this->faker->date,
-            'checkOut' => $this->faker->date,
+            'bookDate' =>  now(),
+            'checkIn' => $checkInDate,
+            'checkOut' => $checkOutDate,
             'specialRequest' => $this->faker->sentence,
             'status' => $this->faker->randomElement(['In progress', 'Check In', 'Check Out']),
             'room_id' => Room::inRandomOrder()->first()->id,
