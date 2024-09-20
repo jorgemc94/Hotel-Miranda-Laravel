@@ -17,7 +17,7 @@ return new class extends Migration
             $table->date('bookDate');
             $table->date('checkIn');
             $table->date('checkOut');
-            $table->string('specialRequest');
+            $table->string('specialRequest')->nullable();
             $table->string('phone');
             $table->string('email');
             $table->enum('status', ['In progress', 'Check In', 'Check Out']);

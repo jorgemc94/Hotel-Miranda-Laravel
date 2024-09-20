@@ -27,22 +27,22 @@
             <img class="room-details__details-img" src="{{  asset($room->photoUrl())  }}" alt="{{ $room->name }}">
         </div>
 
-        <form class="room-details__form" method="POST">
+        <form class="room-details__form" method="POST" action="{{ route('rooms.book', $room->id) }}">
             @csrf
             <div class="room-details__form-title">
                 <span>Check Availability</span>
             </div>
             <div class="room-details__form-control">
-                <label for="check-in">Check In</label>
-                <input id="check-in" name="check_in" type="date" required>
+                <label for="checkIn">Check In</label>
+                <input id="checkIn" name="checkIn" type="date" required>
             </div>
             <div class="room-details__form-control">
-                <label for="check-out">Check Out</label>
-                <input id="check-out" name="check_out" type="date" required>
+                <label for="checkOut">Check Out</label>
+                <input id="checkOut" name="checkOut" type="date" required>
             </div>
             <div class="room-details__form-control">
-                <label for="full-name">Full Name</label>
-                <input id="full-name" name="full_name" type="text" required>
+                <label for="fullName">Full Name</label>
+                <input id="fullName" name="fullName" type="text" required>
             </div>
             <div class="room-details__form-control">
                 <label for="email">Email</label>
@@ -51,6 +51,10 @@
             <div class="room-details__form-control">
                 <label for="phone">Phone</label>
                 <input id="phone" name="phone" type="text" required>
+            </div>
+            <div class="room-details__form-control">
+                <label for="specialRequest">Special Request</label>
+                <input id="specialRequest" name="specialRequest" type="text">
             </div>
             <button class="button upper__case" type="submit">Check Availability</button>
         </form>

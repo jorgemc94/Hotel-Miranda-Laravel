@@ -8,6 +8,7 @@ use App\Http\Controllers\HomeController;
 use App\Http\Controllers\AboutController;
 use App\Http\Controllers\ContactController;
 use App\Http\Controllers\OfferController;
+use App\Http\Controllers\BookingController;
 
 // Route::get('/', function () {
 //     return view('welcome');
@@ -25,6 +26,7 @@ Route::middleware('auth')->group(function () {
 });
 
 Route::get('/', [HomeController::class, 'index'])->name('home');
+Route::post('/rooms/{id}/book', [BookingController::class, 'store'])->name('rooms.book');
 Route::get('/rooms', [RoomController::class, 'index'])->name('rooms') ;
 Route::get('/rooms/{id}', [RoomController::class, 'show'])->name('room-details');
 Route::get('/about', [AboutController::class, 'index'])->name('about');
