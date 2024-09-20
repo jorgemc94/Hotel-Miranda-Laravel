@@ -52,7 +52,7 @@
     </section>
 
     <section class="contact__form --max-width">
-        <form class="form__contact" method="POST" action="{{ route('contact.store') }}">
+        <form class="form__contact" method="POST" action="{{ route('contact.store') }}" id="contactForm" >
             @csrf
             <div class="contact__form-control">
                 <img class="contact__form-control-img contact__form-control-img--full-name"
@@ -84,3 +84,20 @@
     </section>
     
 @endsection
+
+<script src="https://code.jquery.com/jquery-3.6.0.min.js"></script>
+    <script>
+    document.addEventListener('DOMContentLoaded', function() {
+        document.getElementById('contactForm').addEventListener('submit', function(event) {
+            event.preventDefault();
+            toastr.success('Thank you for your message!' , {
+                timeOut: 5000,
+            });
+            setTimeout(function() {
+                event.target.submit();
+            }, 200);
+        });
+    });
+</script>
+
+    <script src="https://cdn.jsdelivr.net/npm/swiper@11/swiper-bundle.min.js"></script>

@@ -21,17 +21,12 @@ class BookingController extends Controller
 
     $checkIn = $request->input('checkIn');
     $checkOut = $request->input('checkOut');
-    $room_id = $id; // Usamos el ID proporcionado en la URL
-
-    // Encuentra la habitación
+    $room_id = $id;
     $room = Room::find($room_id);
 
-    // Verifica si la habitación existe
     if (!$room) {
         return redirect()->back()->with('error', 'La habitación no existe.');
     }
-
-    // Verifica disponibilidad
     if ($room->available($checkIn, $checkOut)->exists()) {
         Booking::create([
             'fullName' => $request->input('fullName'),
@@ -45,9 +40,9 @@ class BookingController extends Controller
             'specialRequest' => $request->input('specialRequest'),
         ]);
 
-        return redirect()->back()->with('success', 'Reserva realizada con éxito.');
+        return redirect()->back()->with('success', 'Reservation made successfully.');
     } else {
-        return redirect()->back()->with('error', 'Lo siento, la habitación no está disponible en esas fechas.');
+        return redirect()->back()->with('error', 'The room is not available on those dates.');
     }
 }
 }

@@ -26,7 +26,7 @@ class ContactFactory extends Factory
             'client_photo' => $this->faker->imageUrl(200, 200, 'people'),
             'subject' => $this->faker->sentence(),
             'comment' => $this->faker->text(255),
-            'status' => $this->faker->randomElement(['false', 'true'])
+            'status' => $this->faker->boolean(),
         ];
     }
 }

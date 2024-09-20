@@ -15,6 +15,7 @@
     <link
         href="https://fonts.googleapis.com/css2?family=Roboto:ital,wght@0,100;0,300;0,400;0,500;0,700;0,900;1,100;1,300;1,400;1,500;1,700;1,900&display=swap"
         rel="stylesheet">
+    <link href="https://cdnjs.cloudflare.com/ajax/libs/toastr.js/latest/toastr.min.css" rel="stylesheet">
 
     <link rel="icon" href="/assets/icon/hotel.ico" type="image/x-icon">
     <!-- Fonts -->
@@ -59,6 +60,7 @@
         </div>
         <main>
             @yield('content')
+            <script src="https://cdnjs.cloudflare.com/ajax/libs/toastr.js/latest/toastr.min.js"></script>
         </main>
             <footer class="footer" style="background-image: url(./assets/img/bg-footer.png);">
             <div class="footer__background">

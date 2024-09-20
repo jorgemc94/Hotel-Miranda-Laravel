@@ -199,3 +199,20 @@
     </section>
     <script src="https://cdn.jsdelivr.net/npm/swiper@11/swiper-bundle.min.js"></script>
 @endsection
+
+<script src="https://code.jquery.com/jquery-3.6.0.min.js"></script>
+<script>
+    document.addEventListener('DOMContentLoaded', function() {
+        @if (session('success'))
+            toastr.success('{{ session('success') }}', '¡Thank you!', {
+                timeOut: 5000
+            });
+        @endif
+
+        @if (session('error'))
+            toastr.error('{{ session('error') }}', 'Sorry', {
+                timeOut: 5000
+            });
+        @endif
+    });
+</script>

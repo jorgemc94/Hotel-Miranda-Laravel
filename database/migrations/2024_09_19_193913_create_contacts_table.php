@@ -13,14 +13,14 @@ return new class extends Migration
     {
         Schema::create('contacts', function (Blueprint $table) {
             $table->id(); 
-            $table->date('date');
+            $table->date('date')->nullable();
             $table->string('client_name');
             $table->string('client_email');
             $table->string('client_phone');
-            $table->string('client_photo');
+            $table->string('client_photo')->nullable();
             $table->string('subject');
-            $table->string('comment');
-            $table->enum('status', ['false', 'true']);
+            $table->text('comment');
+            $table->boolean('status')->default(false);
             $table->timestamps();
         });
     }

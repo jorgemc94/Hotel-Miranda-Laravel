@@ -11,7 +11,7 @@
         </div>
     </header>
     <section class="checking">
-        <form class="checking__inner form --max-width" action="{{ route('rooms') }}" method="GET">
+        <form class="checking__inner form --max-width" action="{{ route('rooms') }}" method="GET" id="availabilityForm">
             <div class="form__control">
                 <div class="form__control-input">
                     <label class="checking__label" for="checkIn">Arrival Date</label>
@@ -356,6 +356,23 @@
             </article>
         </div>
     </section>
+   
+
 @endsection
+    <script src="https://code.jquery.com/jquery-3.6.0.min.js"></script>
+    <script>
+    document.addEventListener('DOMContentLoaded', function() {
+        document.getElementById('availabilityForm').addEventListener('submit', function(event) {
+            event.preventDefault();
+            toastr.success('Redirecting to available rooms...' , {
+                timeOut: 5000,
+            });
+            setTimeout(function() {
+                event.target.submit();
+            }, 1000);
+        });
+    });
+</script>
+
     <script src="https://www.youtube.com/iframe_api"></script>
     <script src="https://cdn.jsdelivr.net/npm/swiper@11/swiper-bundle.min.js"></script>
