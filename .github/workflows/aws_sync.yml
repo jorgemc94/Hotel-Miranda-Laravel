@@ -1,0 +1,24 @@
+name: CI
+
+on:
+  push:
+    branches: [ "main" ]
+jobs:
+    build:
+        name: Build
+        runs-on: ubuntu-latest
+        steps:
+        - name: Hotel Miranda Laravel website's CI/CD
+          uses: appleboy/ssh-action@v1.0.3
+          with:
+            host: ${{ secrets.SSH_HOST }}
+            username: ${{ secrets.SSH_USERNAME }}
+            key: ${{ secrets.SSH_PRIVATE_KEY }}
+            script: |
+                cd /var/www/Hotel-Miranda-Laravel
+                git pull
+                ./vendor/bin/sail composer install --no-interaction --prefer-dist
+                ./vendor/bin/sail artisan migrate --force
+                ./vendor/bin/sail artisan db:seed
+                sudo systemctl restart apache2
+            
